@@ -1,0 +1,71 @@
+.all-permissions {
+  width: 100%;
+
+  &__header {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  &__permissions {
+    border: 2px solid $container-border-color;
+    border-radius: 5px;
+    min-height: 600px;
+    padding: 15px 20px 20px 20px;
+
+    input {
+      width: 24px;
+      height: 24px;
+      margin: 0;
+      margin-right: 8px;
+      border: 2px solid $container-border-color;
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+
+    button {
+        background-color: white;
+        border: none;
+    }
+
+    label {
+      font-size: 14px;
+    }
+
+    i {
+        color: #838294;
+    }
+  }
+
+  &__all {
+    @include flex(unset, center);
+    margin-bottom: 14px;
+  }
+
+  &__child-list {
+    li {
+      margin: 8px 0 8px 54px;
+
+      div {
+        @include flex(unset, center);
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &__parent-item {
+    padding: 5px;
+    border: 1px solid $item-border-color;
+    margin: 8px 0;
+    border-radius: 5px;
+
+    div {
+      @include flex(unset, center);
+    }
+  }
+}
