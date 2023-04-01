@@ -1,10 +1,24 @@
 import React, { useState } from "react";
+import AllPermissionChildItem from "./AllPermissionChildItem";
 
-const AllPermissionParentItem = () => {
+const AllPermissionParentItem = (props) => {
   const [active, setActive] = useState(false);
+  const [checked, setChecked] = useState(
+    props.childPermissions.every((x) => x.isAllowed === true)
+  );
 
   const dropDownHandler = () => {
     setActive(!active);
+  };
+
+  const changeHandler = () => {
+    setChecked(!checked);
+
+    if (!props.childPermissions.every((x) => x.isAllowed === true)) {
+      props.addPermissionWithParentHandler(props.parentId);
+    } else {
+      props.removePermissionWithParentHandler(props.parentId);
+    }
   };
 
   return (
@@ -12,14 +26,23 @@ const AllPermissionParentItem = () => {
       <div>
         <button type="button" onClick={dropDownHandler}>
           {active ? (
-            <i class="fa-solid fa-minus"></i>
+            <i className="fa-solid fa-minus"></i>
           ) : (
-            <i class="fa-solid fa-plus"></i>
+            <i className="fa-solid fa-plus"></i>
           )}
         </button>
-        <input class="form-check-input" id="parent" type="checkbox" />
-        <label class="form-check-label" htmlFor="parent">
-          Hesabat
+        <input
+          className="form-check-input"
+          id={`parent-${props.parentId}`}
+          type="checkbox"
+          checked={props.childPermissions.every((x) => x.isAllowed === true)}
+          onChange={changeHandler}
+        />
+        <label
+          className="form-check-label"
+          htmlFor={`parent-${props.parentId}`}
+        >
+          {props.parentName}
         </label>
       </div>
       <ul
@@ -29,30 +52,15 @@ const AllPermissionParentItem = () => {
             : "all-permissions__child-list d-none"
         }
       >
-        <li>
-          <div>
-            <input class="form-check-input" id="child" type="checkbox" />
-            <label class="form-check-label" htmlFor="child">
-              Hesabat
-            </label>
-          </div>
-        </li>
-        <li>
-          <div>
-            <input class="form-check-input" id="child" type="checkbox" />
-            <label class="form-check-label" htmlFor="child">
-              Hesabat
-            </label>
-          </div>
-        </li>
-        <li>
-          <div>
-            <input class="form-check-input" id="child" type="checkbox" />
-            <label class="form-check-label" htmlFor="achildll">
-              Hesabat
-            </label>
-          </div>
-        </li>
+        {props.childPermissions.map((childPermission) => (
+          <AllPermissionChildItem
+            key={childPermission.childId}
+            childPermission={childPermission}
+            addPermissionHandler={(childId) =>
+              props.addPermissionHandler(childId)
+            }
+          />
+        ))}
       </ul>
     </li>
   );
