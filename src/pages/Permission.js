@@ -124,17 +124,17 @@ const DUMMY_DATA = [
     childPermissions: [
       {
         childId: 16,
-        childPermissionName: "İstifadəçilər1",
+        childPermissionName: "Qruplar1",
         isAllowed: false,
       },
       {
         childId: 17,
-        childPermissionName: "İstifadəçilər2",
+        childPermissionName: "Qruplar2",
         isAllowed: false,
       },
       {
         childId: 18,
-        childPermissionName: "İstifadəçilər3",
+        childPermissionName: "Qruplar3",
         isAllowed: false,
       },
     ],
